@@ -123,7 +123,7 @@ module 기호 바로 아래에 C에서 작성한 `start_timer`와 `stop_timer` �
 ### 3. 컴파일 및 공유 라이브러리 빌드
 #### A. Bufferized MLIR → LLVM Dialect 하향
 ```bash
-../llvm-project/build/bin/mlir-opt snn_dnn_bufferized.mlir \
+../llvm-project/build/bin/mlir-opt outputs/snn_dnn_bufferized.mlir \
       --canonicalize \
       -convert-linalg-to-loops \
       -lower-affine \
@@ -137,26 +137,26 @@ module 기호 바로 아래에 C에서 작성한 `start_timer`와 `stop_timer` �
       -reconcile-unrealized-casts \
       --mlir-timing \
       --mlir-output-format=text \
-      -o snn_dnn_llvm_dialect.mlir
+      -o outputs/snn_dnn_llvm_dialect.mlir
 ```
 #### B. LLVM Dialect → LLVM IR 변환
 ```bash
-../llvm-project/build/bin/mlir-translate -mlir-to-llvmir snn_dnn_llvm_dialect.mlir -o snn_dnn_llvm_ir.ll
+../llvm-project/build/bin/mlir-translate -mlir-to-llvmir outputs/snn_dnn_llvm_dialect.mlir -o outputs/snn_dnn_llvm_ir.ll
 ```
 #### C. Clang 컴파일러를 이용한 타이머 링킹 및 공유 라이브러리(`.so`) 생성
 MLIR 러너 유틸리티 라이브러리(`mlir_c_runner_utils`)를 링크하여 타이머와 함께 패키징합니다.
 ```bash
-../llvm-project/build/bin/clang -O3 -g -shared -fPIC snn_dnn_llvm_ir.ll timer.c \             
+../llvm-project/build/bin/clang -O3 -g -shared -fPIC outputs/snn_dnn_llvm_ir.ll src/timer.c \             
     -L../llvm-project/build/lib \
     -lmlir_c_runner_utils \
     -lmlir_runner_utils \
     -Wl,-rpath,$(pwd)/../llvm-project/build/lib \
-    -o libmodel.so
+    -o outputs/libmodel.so
 ```
 
 ### 4. 파이썬 C-Interface 연동 검증 (`run_model.py`)
 ```bash
-python3 run_model.py
+python3 tests/run_model.py
 ```
 #### 실행 로그 결과 예시
 ```
