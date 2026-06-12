@@ -95,7 +95,7 @@ if __name__ == "__main__":
         )
 
     # 4. 생성된 MLIR 코드를 파일로 저장
-    output_filename = "snn_dnn_linalg.mlir"
+    output_filename = "outputs/snn_dnn_linalg.mlir"
     with open(output_filename, "w") as f:
         f.write(str(mlir_module))
 
