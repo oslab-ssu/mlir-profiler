@@ -132,9 +132,9 @@ def generate_comprehensive_profile():
     memory_data = profile_memory_to_dict("snn_dnn_bufferized.mlir")
     
     # 2. 단계별 연산 빈도수 추출
-    linalg_total, linalg_ops = count_regex_ops("snn_dnn_bufferized.mlir", r'linalg\.[a-zA-Z0-9_]+')
-    llvm_dialect_total, llvm_dialect_ops = count_regex_ops("snn_dnn_llvm_dialect.mlir", r'llvm\.[a-zA-Z0-9_]+')
-    llvm_ir_total, llvm_ir_ops = count_llvm_ir_ops("snn_dnn_llvm_ir.ll")
+    linalg_total, linalg_ops = count_regex_ops("outputs/snn_dnn_bufferized.mlir", r'linalg\.[a-zA-Z0-9_]+')
+    llvm_dialect_total, llvm_dialect_ops = count_regex_ops("outputs/snn_dnn_llvm_dialect.mlir", r'llvm\.[a-zA-Z0-9_]+')
+    llvm_ir_total, llvm_ir_ops = count_llvm_ir_ops("outputs/snn_dnn_llvm_ir.ll")
     
     # 3. 최종 JSON 구조 조립
     final_json = {
@@ -159,7 +159,7 @@ def generate_comprehensive_profile():
     }
     
     # 4. 파일로 저장 및 터미널 출력
-    output_filename = "profile.json"
+    output_filename = "outputs/profile.json"
     json_string = json.dumps(final_json, indent=4, ensure_ascii=False)
     
     with open(output_filename, "w", encoding="utf-8") as f:
