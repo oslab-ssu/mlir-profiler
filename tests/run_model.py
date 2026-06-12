@@ -2,7 +2,7 @@ import ctypes
 import numpy as np
 
 # 1. 컴파일된 공유 라이브러리 로드
-lib = ctypes.CDLL("./libmodel.so")
+lib = ctypes.CDLL("outputs/libmodel.so")
 
 # 2. MLIR MemRef와 1:1로 매칭되는 C 구조체 동적 생성 헬퍼
 def make_memref_struct(rank, c_type=ctypes.c_float):
