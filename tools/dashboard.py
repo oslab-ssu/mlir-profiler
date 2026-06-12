@@ -13,7 +13,7 @@ st.markdown("추출된 `profile.json` 데이터를 기반으로 메모리 대역
 # 1. JSON 데이터 로드
 @st.cache_data
 def load_data():
-    file_path = "profile.json"
+    file_path = "outputs/profile.json"
     if not os.path.exists(file_path):
         return None
     with open(file_path, "r", encoding="utf-8") as f:
