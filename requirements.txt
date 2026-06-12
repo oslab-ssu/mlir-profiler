@@ -1,0 +1,14 @@
+# Torch-MLIR (특정 Whl URL 지정)
+https://github.com/llvm/torch-mlir-release/releases/download/dev-wheels/torch_mlir-20260401.769-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl
+
+# PyTorch 및 Torchvision Nightly (Extra Index URL 지정)
+--extra-index-url https://download.pytorch.org/whl/nightly/cpu
+--pre
+torch
+torchvision
+
+# 기타 필요한 패키지들
+snntorch
+streamlit
+pandas
+plotly
